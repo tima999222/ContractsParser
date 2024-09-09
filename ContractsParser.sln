@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34408.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractsParser", "ContractsParser\ContractsParser.csproj", "{84E733DD-70C2-459D-9C2A-1682E91F73BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractsParser.Tests", "ContractsParser.Tests\ContractsParser.Tests.csproj", "{09964DCB-F0D7-404F-80FD-27D24F7B87C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84E733DD-70C2-459D-9C2A-1682E91F73BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84E733DD-70C2-459D-9C2A-1682E91F73BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84E733DD-70C2-459D-9C2A-1682E91F73BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84E733DD-70C2-459D-9C2A-1682E91F73BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98885A17-4308-4FD5-8CCA-1341CD1E9BE1}
+	EndGlobalSection
+EndGlobal
