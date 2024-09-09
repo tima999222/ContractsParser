@@ -18,8 +18,8 @@ class Program
 
         var tasks = contracts.Select(async contract =>
         {
-/*            try
-            {*/
+            try
+            {
                 string contractCode = await blockScoutService.GetContractCode(contract.Address.Hash);
                 var funcs = contractsParser.ExtractFunctions(contractCode);
 
@@ -29,11 +29,11 @@ class Program
                 await promptGenerator.GeneratePromptsInFilesAsync(dict);
 
                 Console.WriteLine($"all prompts in {contract.Address.Hash} were generated");
-            /*}*/
-/*            catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error processing contract {contract.Address.Hash}: {ex.Message}");
-            }*/
+            }
         });
 
         await Task.WhenAll(tasks);

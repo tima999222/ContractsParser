@@ -24,38 +24,58 @@ namespace ContractsParser.BlockscoutApi
         public async Task<List<ContractItem>> GetContracts(int count, string q = "")
         {
             string url = _urlBuild($"/smart-contracts?q={q}&filter=solidity");
-            var contracts = new List<ContractItem>();
+            var uniqueContracts = new List<ContractItem>();
 
-            while (contracts.Count < count)
+            while (uniqueContracts.Count < count)
             {
                 // Выполняем запрос к API
                 var response = await _httpClient.GetStringAsync(url);
                 var contractResponse = JsonSerializer.Deserialize<ContractResponse>(response);
 
-                // Добавляем контракты с транзакциями > 0
-                foreach (var contract in contractResponse.Items)
-                {
-                    if (contract.TxCount > 0)
-                    {
-                        contracts.Add(contract);
-                    }
-                    if (contracts.Count >= count) break;
-                }
+                // Собираем контракты с транзакциями > 0
+                var allContracts = contractResponse.Items.Where(contract => contract.TxCount > 0).ToList();
+
+                Console.WriteLine($"{allContracts.Count} contracts found");
+
+                // Группируем контракты по имени в текущей партии, выбираем самый свежий
+                var newUniqueContracts = allContracts
+                    .GroupBy(contract => contract.Address.Name)
+                    .Select(group => group.OrderByDescending(contract => contract.VerifiedAt).First())
+                    .ToList();
+
+                // Объединяем новые уникальные контракты с уже собранными и фильтруем окончательно
+                uniqueContracts = uniqueContracts
+                    .Concat(newUniqueContracts)
+                    .GroupBy(contract => contract.Address.Name)
+                    .Select(group => group.OrderByDescending(contract => contract.VerifiedAt).First())
+                    .Take(count)
+                    .ToList();
+
+                Console.WriteLine($"{uniqueContracts.Count} unique in list");
 
                 // Проверяем наличие параметров для следующей страницы
-                if (contractResponse.NextPageParams != null)
+                if (contractResponse.NextPageParams != null && uniqueContracts.Count < count)
                 {
                     // Формируем URL для следующего запроса
                     url = _urlBuild($"/smart-contracts?q={q}&filter=solidity&smart_contract_id={contractResponse.NextPageParams.SmartContractId}&coin_balance={contractResponse.NextPageParams.CoinBalance}");
                 }
                 else
                 {
-                    break; // Если нет параметров для следующей страницы, выходим из цикла
+                    break; // Если нет параметров для следующей страницы или достигнуто необходимое количество, выходим из цикла
                 }
             }
 
-            return contracts;
+            foreach ( var item in uniqueContracts )
+            {
+                Console.WriteLine(item.Address.Name);
+            }
+            
+
+            return uniqueContracts;
         }
+
+
+
 
         public async Task<string> GetContractCode(string contractHash)
         {
