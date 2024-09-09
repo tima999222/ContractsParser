@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractsParser", "Contract
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractsParser.Tests", "ContractsParser.Tests\ContractsParser.Tests.csproj", "{09964DCB-F0D7-404F-80FD-27D24F7B87C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractParserAPI", "ContractParserAPI\ContractParserAPI.csproj", "{32BECCAA-7989-44BF-AE70-51AB9BD06ADC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09964DCB-F0D7-404F-80FD-27D24F7B87C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BECCAA-7989-44BF-AE70-51AB9BD06ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BECCAA-7989-44BF-AE70-51AB9BD06ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BECCAA-7989-44BF-AE70-51AB9BD06ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BECCAA-7989-44BF-AE70-51AB9BD06ADC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
