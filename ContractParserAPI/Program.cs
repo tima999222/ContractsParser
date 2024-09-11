@@ -40,13 +40,13 @@ static Dictionary<string, string> _generateDict(string name, List<string> funcs)
 
     foreach (var func in funcs)
     {
-        dict.Add($"ContractsParser\\output\\prompt-{name}-{count}.txt", func);
+        dict.Add($"prompt-{name}-{count}", func);
         count++;
     }
     return dict;
 }
 
-static async Task<List<string>> GetPromptsAsync(int count, string query = "")
+static async Task<List<KeyValuePair<string, string>>> GetPromptsAsync(int count, string query = "")
 {
     IPromptGenerator promptGenerator = new FormulaPromptGenerator();
     ContractParser contractsParser = new ContractParser();
@@ -57,7 +57,7 @@ static async Task<List<string>> GetPromptsAsync(int count, string query = "")
 
     Console.WriteLine($"Found {contracts.Count} contracts");
 
-    var prompts = new List<string>();
+    var prompts = new List<KeyValuePair<string, string>>();
         
     var tasks = contracts.Select(async contract =>
     {

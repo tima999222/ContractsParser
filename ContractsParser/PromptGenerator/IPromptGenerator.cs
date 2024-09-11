@@ -2,6 +2,6 @@
 {
     public interface IPromptGenerator
     {
-        public Task<List<string>> GeneratePromptsAsync(Dictionary<string, string> fileOutputParamMap);
+        public Task<List<KeyValuePair<string, string>>> GeneratePromptsAsync(Dictionary<string, string> fileOutputParamMap);
     }
 }
