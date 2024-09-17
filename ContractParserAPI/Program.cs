@@ -69,7 +69,8 @@ static async Task<List<KeyValuePair<string, string>>> GetPromptsAsync(int count,
             Console.WriteLine($"found {funcs.Count} functions in {contract.Address.Hash}");
 
             var dict = _generateDict(contract.Address.Name, funcs);
-            prompts = await promptGenerator.GeneratePromptsAsync(dict);
+            var tempPrompts = await promptGenerator.GeneratePromptsAsync(dict);
+            prompts.AddRange(tempPrompts);
 
             Console.WriteLine($"all prompts in {contract.Address.Name} were generated");
         }
