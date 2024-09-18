@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using ContractsParser.BlockscoutApi;
 using ContractsParser.ContractParser;
 using ContractsParser.PromptGenerator;
@@ -36,14 +37,30 @@ app.Run();
 static Dictionary<string, string> _generateDict(string name, List<string> funcs)
 {
     var dict = new Dictionary<string, string>();
-    int count = 1;
 
     foreach (var func in funcs)
     {
-        dict.Add($"prompt-{name}-{count}", func);
-        count++;
+        var funcName = ExtractFunctionName(func);
+
+        if (funcName != null)
+        {
+            dict.Add($"prompt-{name}-{funcName}", func);
+        }
     }
     return dict;
+}
+
+static string? ExtractFunctionName(string input)
+{
+    string pattern = @"function\s+(\w+)\s*\(";
+    Match match = Regex.Match(input, pattern);
+
+    if (match.Success)
+    {
+        return match.Groups[1].Value;
+    }
+
+    return null;
 }
 
 static async Task<List<KeyValuePair<string, string>>> GetPromptsAsync(int count, string query = "")
