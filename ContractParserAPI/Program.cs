@@ -42,9 +42,11 @@ static Dictionary<string, string> _generateDict(string name, List<string> funcs)
     {
         var funcName = ExtractFunctionName(func);
 
-        if (funcName != null)
+        var keyToAdd = $"prompt-{name}-{funcName}";
+
+        if (funcName != null && !dict.ContainsKey(keyToAdd))
         {
-            dict.Add($"prompt-{name}-{funcName}", func);
+            dict.Add(keyToAdd, func);
         }
     }
     return dict;
